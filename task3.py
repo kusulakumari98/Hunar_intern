@@ -1,209 +1,47 @@
-{
- "cells": [
-  {
-   "cell_type": "code",
-   "execution_count": 1,
-   "id": "7e63329b",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Naive Bayes Classification Report:\n",
-      "              precision    recall  f1-score   support\n",
-      "\n",
-      "           0       1.00      1.00      1.00         1\n",
-      "           1       1.00      1.00      1.00         2\n",
-      "\n",
-      "    accuracy                           1.00         3\n",
-      "   macro avg       1.00      1.00      1.00         3\n",
-      "weighted avg       1.00      1.00      1.00         3\n",
-      "\n",
-      "Naive Bayes Accuracy: 1.0\n",
-      "\n",
-      "SVM Classification Report:\n",
-      "              precision    recall  f1-score   support\n",
-      "\n",
-      "           0       1.00      1.00      1.00         1\n",
-      "           1       1.00      1.00      1.00         2\n",
-      "\n",
-      "    accuracy                           1.00         3\n",
-      "   macro avg       1.00      1.00      1.00         3\n",
-      "weighted avg       1.00      1.00      1.00         3\n",
-      "\n",
-      "SVM Accuracy: 1.0\n"
-     ]
-    }
-   ],
-   "source": [
-    "from sklearn.feature_extraction.text import CountVectorizer\n",
-    "from sklearn.model_selection import train_test_split\n",
-    "from sklearn.naive_bayes import MultinomialNB\n",
-    "from sklearn.svm import SVC\n",
-    "from sklearn.metrics import accuracy_score, classification_report\n",
-    "\n",
-    "# Sample email data\n",
-    "emails = [\n",
-    "    'Congratulations! You have won a lottery worth $1000.',\n",
-    "    'Get free entry to win an iPhone.',\n",
-    "    'Hi friend, how are you doing today?',\n",
-    "    'Meeting scheduled at 10 AM tomorrow.',\n",
-    "    'Earn money fast from home!!!',\n",
-    "    'Reminder: Project submission is due today.',\n",
-    "    'Free tickets available for you.',\n",
-    "    'Let’s catch up for lunch.',\n",
-    "    'Exclusive deal just for you, click now!',\n",
-    "    'Don’t forget our dinner tonight.'\n",
-    "]\n",
-    "\n",
-    "# Labels: 1 = Spam, 0 = Ham (Non-Spam)\n",
-    "labels = [1, 1, 0, 0, 1, 0, 1, 0, 1, 0]\n",
-    "\n",
-    "# Convert text data into numerical vectors\n",
-    "vectorizer = CountVectorizer()\n",
-    "X = vectorizer.fit_transform(emails)\n",
-    "\n",
-    "# Split data into training and testing sets\n",
-    "X_train, X_test, y_train, y_test = train_test_split(X, labels, test_size=0.3, random_state=42)\n",
-    "\n",
-    "# Train Naive Bayes classifier\n",
-    "nb_model = MultinomialNB()\n",
-    "nb_model.fit(X_train, y_train)\n",
-    "nb_preds = nb_model.predict(X_test)\n",
-    "\n",
-    "# Evaluate Naive Bayes model\n",
-    "print(\"Naive Bayes Classification Report:\")\n",
-    "print(classification_report(y_test, nb_preds))\n",
-    "print(\"Naive Bayes Accuracy:\", accuracy_score(y_test, nb_preds))\n",
-    "\n",
-    "# Train SVM classifier\n",
-    "svm_model = SVC(kernel='linear')\n",
-    "svm_model.fit(X_train, y_train)\n",
-    "svm_preds = svm_model.predict(X_test)\n",
-    "\n",
-    "# Evaluate SVM model\n",
-    "print(\"\\nSVM Classification Report:\")\n",
-    "print(classification_report(y_test, svm_preds))\n",
-    "print(\"SVM Accuracy:\", accuracy_score(y_test, svm_preds))\n"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 2,
-   "id": "81d49641",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Naive Bayes Classification Report:\n",
-      "              precision    recall  f1-score   support\n",
-      "\n",
-      "           0       1.00      1.00      1.00         1\n",
-      "           1       1.00      1.00      1.00         2\n",
-      "\n",
-      "    accuracy                           1.00         3\n",
-      "   macro avg       1.00      1.00      1.00         3\n",
-      "weighted avg       1.00      1.00      1.00         3\n",
-      "\n",
-      "Naive Bayes Accuracy: 1.0\n",
-      "\n",
-      "SVM Classification Report:\n",
-      "              precision    recall  f1-score   support\n",
-      "\n",
-      "           0       1.00      1.00      1.00         1\n",
-      "           1       1.00      1.00      1.00         2\n",
-      "\n",
-      "    accuracy                           1.00         3\n",
-      "   macro avg       1.00      1.00      1.00         3\n",
-      "weighted avg       1.00      1.00      1.00         3\n",
-      "\n",
-      "SVM Accuracy: 1.0\n"
-     ]
-    }
-   ],
-   "source": [
-    "from sklearn.feature_extraction.text import CountVectorizer\n",
-    "from sklearn.model_selection import train_test_split\n",
-    "from sklearn.naive_bayes import MultinomialNB\n",
-    "from sklearn.svm import SVC\n",
-    "from sklearn.metrics import accuracy_score, classification_report\n",
-    "\n",
-    "# Sample email data\n",
-    "emails = [\n",
-    "    'Congratulations! You have won a lottery worth $1000.',\n",
-    "    'Get free entry to win an iPhone.',\n",
-    "    'Hi friend, how are you doing today?',\n",
-    "    'Meeting scheduled at 10 AM tomorrow.',\n",
-    "    'Earn money fast from home!!!',\n",
-    "    'Reminder: Project submission is due today.',\n",
-    "    'Free tickets available for you.',\n",
-    "    'Let’s catch up for lunch.',\n",
-    "    'Exclusive deal just for you, click now!',\n",
-    "    'Don’t forget our dinner tonight.'\n",
-    "]\n",
-    "\n",
-    "# Labels: 1 = Spam, 0 = Ham (Non-Spam)\n",
-    "labels = [1, 1, 0, 0, 1, 0, 1, 0, 1, 0]\n",
-    "\n",
-    "# Convert text data into numerical vectors\n",
-    "vectorizer = CountVectorizer()\n",
-    "X = vectorizer.fit_transform(emails)\n",
-    "\n",
-    "# Split data into training and testing sets\n",
-    "X_train, X_test, y_train, y_test = train_test_split(X, labels, test_size=0.3, random_state=42)\n",
-    "\n",
-    "# Train Naive Bayes classifier\n",
-    "nb_model = MultinomialNB()\n",
-    "nb_model.fit(X_train, y_train)\n",
-    "nb_preds = nb_model.predict(X_test)\n",
-    "\n",
-    "# Evaluate Naive Bayes model\n",
-    "print(\"Naive Bayes Classification Report:\")\n",
-    "print(classification_report(y_test, nb_preds))\n",
-    "print(\"Naive Bayes Accuracy:\", accuracy_score(y_test, nb_preds))\n",
-    "\n",
-    "# Train SVM classifier\n",
-    "svm_model = SVC(kernel='linear')\n",
-    "svm_model.fit(X_train, y_train)\n",
-    "svm_preds = svm_model.predict(X_test)\n",
-    "\n",
-    "# Evaluate SVM model\n",
-    "print(\"\\nSVM Classification Report:\")\n",
-    "print(classification_report(y_test, svm_preds))\n",
-    "print(\"SVM Accuracy:\", accuracy_score(y_test, svm_preds))\n"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "cbc08608",
-   "metadata": {},
-   "outputs": [],
-   "source": []
-  }
- ],
- "metadata": {
-  "kernelspec": {
-   "display_name": "Python 3 (ipykernel)",
-   "language": "python",
-   "name": "python3"
-  },
-  "language_info": {
-   "codemirror_mode": {
-    "name": "ipython",
-    "version": 3
-   },
-   "file_extension": ".py",
-   "mimetype": "text/x-python",
-   "name": "python",
-   "nbconvert_exporter": "python",
-   "pygments_lexer": "ipython3",
-   "version": "3.11.5"
-  }
- },
- "nbformat": 4,
- "nbformat_minor": 5
-}
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score, classification_report
+
+# Email samples
+emails = [
+    'Congratulations! You have won a lottery worth $1000.',
+    'Get free entry to win an iPhone.',
+    'Hi friend, how are you doing today?',
+    'Meeting scheduled at 10 AM tomorrow.',
+    'Earn money fast from home!!!',
+    'Reminder: Project submission is due today.',
+    'Free tickets available for you.',
+    'Let’s catch up for lunch.',
+    'Exclusive deal just for you, click now!',
+    'Don’t forget our dinner tonight.'
+]
+
+# Labels (1 = Spam, 0 = Ham)
+labels = [1, 1, 0, 0, 1, 0, 1, 0, 1, 0]
+
+# Convert text data to numerical features
+vectorizer = CountVectorizer()
+X = vectorizer.fit_transform(emails)
+
+# Split data into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, labels, test_size=0.3, random_state=42)
+
+# Naive Bayes Model
+nb_model = MultinomialNB()
+nb_model.fit(X_train, y_train)
+nb_preds = nb_model.predict(X_test)
+
+print("Naive Bayes Classification Report:")
+print(classification_report(y_test, nb_preds))
+print("Naive Bayes Accuracy:", accuracy_score(y_test, nb_preds))
+
+# Support Vector Machine (SVM) Model
+svm_model = SVC(kernel='linear')
+svm_model.fit(X_train, y_train)
+svm_preds = svm_model.predict(X_test)
+
+print("\nSVM Classification Report:")
+print(classification_report(y_test, svm_preds))
+print("SVM Accuracy:", accuracy_score(y_test, svm_preds))
